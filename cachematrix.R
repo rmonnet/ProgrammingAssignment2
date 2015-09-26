@@ -20,20 +20,28 @@
 ## - getinv, get the value of the matrix inverse
 
 makeCacheMatrix <- function(mat = matrix()) {
+  ## defines an object to store the matrix inverse.
   inv <- NULL
+  ## defines a function to associate a matrix value with this object.
   set <- function(x) {
     mat <<- x
     inv <<- NULL
   }
+  ## defines a function to retrieve the matrix value associated with this object.
   get <- function() {
     mat
   }
+  ## defines a function to set the matrix inverse for this object.
   setinv <- function(i) {
     inv <<- i
   }
+  ## defines a function to retrieve the matrix inverse for this object.
+  ## The function returns NULL if the inverse hasn't been stored with setinv()
+  ## since the matrix was last modified with set().
   getinv <- function() {
     inv
   }
+  ## return the list containing the methods associated with this object.
   list(
     set = set, get = get, setinv = setinv, getinv = getinv
   )
@@ -44,11 +52,14 @@ makeCacheMatrix <- function(mat = matrix()) {
 ## changed it returns the cached value, else it computes and cache the inverse.
 
 cacheSolve <- function(x, ...) {
+  ## retrieved the cached inverse
   res <- x$getinv()
+  ## a cached value exists, just return it
   if (!is.null(res)) {
     message("getting cached data")
     return(res)
   }
+  ## no cached value, compute the inverse, cache it and return it.
   m <- x$get()
   i <- solve(m)
   x$setinv(i)
