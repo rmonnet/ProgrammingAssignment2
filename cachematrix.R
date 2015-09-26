@@ -8,7 +8,9 @@
 ## Note: this follows the example for this exercise with a separate cacheSolve
 ## function but another (better) strategy would be to implement the logic in
 ## cache solve within the getinv() method. This way there will be no need to manually
-## call cacheSolve before getinv().
+## call cacheSolve before getinv(), we could also remove the setinv() from the matrix
+## object interface which would prevent users to store an invalid inverse value in the 
+## matrix object.
 
 ## makeCacheMatrix creates a matrix object with the following methods:
 ##
